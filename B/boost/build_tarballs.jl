@@ -64,8 +64,7 @@ install_license LICENSE_1_0.txt
 
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
-platforms = filter!(p -> (Sys.islinux(p) && arch(p) == "x86_64" &&
-                           libc(p) == "gnu"), supported_platforms())
+platforms = filter!(p -> (Sys.islinux(p) && arch(p) == "x86_64"), supported_platforms())
 platforms = expand_cxxstring_abis(platforms)
 
 # The products that we will ensure are always built
