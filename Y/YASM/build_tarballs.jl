@@ -7,7 +7,7 @@ version = v"1.3.0"
 
 # Collection of sources required to complete build
 sources = [
-    ArchiveSource("http://www.tortall.net/projects/yasm/releases/yasm-1.3.0.tar.gz", "3dce6601b495f5b3d45b59f7d2492a340ee7e84b5beca17e48f862502bd5603f")
+    ArchiveSource("https://www.tortall.net/projects/yasm/releases/yasm-1.3.0.tar.gz", "3dce6601b495f5b3d45b59f7d2492a340ee7e84b5beca17e48f862502bd5603f")
 ]
 
 # Bash recipe for building across all platforms
@@ -23,7 +23,7 @@ install_license COPYING
 
 # These are the platforms we will build for by default, unless further
 # platforms are passed in on the command line
-platforms = supported_platforms(; experimental=true)
+platforms = supported_platforms()
 
 # The products that we will ensure are always built
 products = [
