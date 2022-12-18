@@ -10,11 +10,12 @@ delete!(Pkg.Types.get_last_stdlibs(v"1.6.3"), uuid)
 julia_versions = [v"1.6.3", v"1.7", v"1.8", v"1.9", v"1.10"]
 
 name = "OpenSpiel"
-version = v"1.1.1"
+version_str = "1.2"
+version = Version(version_str)
 
 # Collection of sources required to complete build
 sources = [
-    ArchiveSource("https://github.com/deepmind/open_spiel/archive/v1.1.1.tar.gz", "73d46e2d9ce7a86a420aad141b789e98237463b5c98608401faf86b15ec5eaf9"),
+    ArchiveSource("https://github.com/deepmind/open_spiel/archive/v$version_str.tar.gz", "1f329c04a52aa6ff7812cb1aacb57fc08d9d85964498e57196c756553dd4544e"),
     ArchiveSource("https://github.com/findmyway/dds/archive/v0.1.1.tar.gz", "fd13ee77feb5b5c3dfcc3333a0523266beb2a3d27715703cf508313af25306e5"),
     ArchiveSource("https://github.com/abseil/abseil-cpp/archive/20211102.0.tar.gz", "dcf71b9cba8dc0ca9940c4b316a0c796be8fab42b070bb6b7cab62b48f0e66c4"),
     ArchiveSource("https://github.com/findmyway/hanabi-learning-environment/archive/v0.1.0.tar.gz", "6126936fd13a95f8cadeacaa69dfb38a960eaf3bd588aacc8893a6e07e4791a3"),
@@ -32,7 +33,9 @@ mv project_acpc_server-* open_spiel/open_spiel/games/universal_poker/acpc
 
 mkdir open_spiel/build
 cd open_spiel/build
-export OPEN_SPIEL_BUILD_WITH_JULIA=ON OPEN_SPIEL_BUILD_WITH_PYTHON=OFF OPEN_SPIEL_BUILD_WITH_HANABI=ON OPEN_SPIEL_BUILD_WITH_ACPC=OFF
+export OPEN_SPIEL_BUILD_WITH_JULIA=ON OPEN_SPIEL_BUILD_WITH_PYTHON=OFF \
+       OPEN_SPIEL_BUILD_WITH_HANABI=ON OPEN_SPIEL_BUILD_WITH_ACPC=OFF
+
 cmake \
     -DCMAKE_FIND_ROOT_PATH=${prefix} \
     -DCMAKE_INSTALL_PREFIX=$prefix \
