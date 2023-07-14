@@ -33,6 +33,13 @@ if [[ "${target}" == *-freebsd* ]]; then
     export LDFLAGS="-lexecinfo -undefined"
 fi
 
+# Use GCC on FreeBSD
+toolchain="$CMAKE_TARGET_TOOLCHAIN"
+if [[ "${target}" == *-freebsd* ]]; then
+    toolchain="${CMAKE_TARGET_TOOLCHAIN%.*}_gcc.cmake"
+fi
+
+
 if [[ "${target}" == x86_64-apple-darwin* ]]; then
     # Work around the issue
     # /opt/x86_64-apple-darwin14/x86_64-apple-darwin14/sys-root/usr/local/include/arrow/type.h:1745:36: error: 'get<arrow::FieldPath, arrow::FieldPath, std::basic_string<char>, std::vector<arrow::FieldRef>>' is unavailable: introduced in macOS 10.14
@@ -49,27 +56,27 @@ if [[ "${target}" == x86_64-apple-darwin* ]]; then
 fi
 
 CMAKE_FLAGS=(-DCMAKE_INSTALL_PREFIX=${prefix}
--DCMAKE_TOOLCHAIN_FILE=${CMAKE_TARGET_TOOLCHAIN}
--DCMAKE_PREFIX_PATH=${prefix}
--DCMAKE_FIND_ROOT_PATH=${prefix}
--DCMAKE_BUILD_TYPE=Release
--DBUILD_PYTHON_BINDINGS=OFF
--DBUILD_JAVA_BINDINGS=OFF
--DBUILD_CSHARP_BINDINGS=OFF
--DGDAL_USE_CURL=ON
--DGDAL_USE_EXPAT=ON
--DGDAL_USE_GEOTIFF=ON
--DGDAL_USE_GEOS=ON
--DGDAL_USE_OPENJPEG=ON
--DGDAL_USE_SQLITE3=ON
--DGDAL_USE_TIFF=ON
--DGDAL_USE_ZLIB=ON
--DGDAL_USE_ZSTD=ON
--DGDAL_USE_POSTGRESQL=ON
--DPostgreSQL_INCLUDE_DIR=${includedir}
--DPostgreSQL_LIBRARY=${libdir}/libpq.${dlext}
--DGDAL_USE_ARROW=ON
--DGDAL_USE_PARQUET=ON)
+    -DCMAKE_TOOLCHAIN_FILE="$toolchain"
+    -DCMAKE_PREFIX_PATH=${prefix}
+    -DCMAKE_FIND_ROOT_PATH=${prefix}
+    -DCMAKE_BUILD_TYPE=Release
+    -DBUILD_PYTHON_BINDINGS=OFF
+    -DBUILD_JAVA_BINDINGS=OFF
+    -DBUILD_CSHARP_BINDINGS=OFF
+    -DGDAL_USE_CURL=ON
+    -DGDAL_USE_EXPAT=ON
+    -DGDAL_USE_GEOTIFF=ON
+    -DGDAL_USE_GEOS=ON
+    -DGDAL_USE_OPENJPEG=ON
+    -DGDAL_USE_SQLITE3=ON
+    -DGDAL_USE_TIFF=ON
+    -DGDAL_USE_ZLIB=ON
+    -DGDAL_USE_ZSTD=ON
+    -DGDAL_USE_POSTGRESQL=ON
+    -DPostgreSQL_INCLUDE_DIR=${includedir}
+    -DPostgreSQL_LIBRARY=${libdir}/libpq.${dlext}
+    -DGDAL_USE_ARROW=ON
+    -DGDAL_USE_PARQUET=ON)
 
 # NetCDF is the most restrictive dependency as far as platform availability, so we'll use it where applicable but disable it otherwise
 if ! find ${libdir} -name "libnetcdf*.${dlext}" -exec false '{}' +; then
