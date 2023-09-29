@@ -3,12 +3,12 @@
 using BinaryBuilder
 
 name = "Tesseract"
-version = v"5.1.0"
+version = v"5.3.2"
 
 # Collection of sources required to build Tesseract
 sources = [
     GitSource("https://github.com/tesseract-ocr/tesseract.git",
-                  "c2a3efe2824e1c8a0810e82a43406ba8e01527c4"),
+                  "489f101c7e2276c00490f3ab70e9e7926fc6b481"),
     DirectorySource("./bundled")
 ]
 
@@ -41,9 +41,9 @@ dependencies = [
     Dependency("Giflib_jll"),
     Dependency("JpegTurbo_jll"),
     Dependency("libpng_jll"),
-    Dependency("Libtiff_jll"; compat="~4.3, ~4.4"),
+    Dependency("Libtiff_jll"; compat="~4.5.1"),
     Dependency("Zlib_jll"),
-    Dependency("Leptonica_jll"; compat="~1.82"),
+    Dependency("Leptonica_jll"; compat="~1.83"),
     Dependency("CompilerSupportLibraries_jll"),
     # Optional dependencies
     # Dependency("ICU_jll"),
