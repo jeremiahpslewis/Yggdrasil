@@ -3,11 +3,11 @@
 using BinaryBuilder, Pkg
 
 name = "Valhalla"
-version = v"3.3.0"
+version = v"3.4.0"
 
 # Collection of sources required to complete build
 sources = [
-    GitSource("https://github.com/valhalla/valhalla.git", "ea7d44af37c47fcf0cb186e7ba0f9f77e96f202a"),
+    GitSource("https://github.com/valhalla/valhalla.git", "cbabe7cfbad2225090e4c006c778f1f0a7b3ec4e"),
     DirectorySource("./bundled"),
 ]
 
