@@ -3,7 +3,7 @@
 using BinaryBuilder, Pkg
 
 name = "oxigraph_server"
-version = v"0.3.20"
+version = v"0.3.21"
 
 url_prefix = "https://github.com/oxigraph/oxigraph/releases/download/v$version/oxigraph_server_v$version"
 
