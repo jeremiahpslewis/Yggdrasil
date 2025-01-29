@@ -1,13 +1,13 @@
 using BinaryBuilder
 
 name = "Bzip2"
-version = v"1.0.8"
+version = v"1.0.9" # not tagged, pick up patches since 1.0.8 release
 
 
 # Collection of sources required to build bzip2
 sources = [
-    GitSource("git://sourceware.org/git/bzip2.git",
-              "6a8690fc8d26c815e798c588f796eabe9d684cf0"),
+    GitSource("https://sourceware.org/git/bzip2.git",
+              "fbc4b11da543753b3b803e5546f56e26ec90c2a7"),
 ]
 
 # Bash recipe for building across all platforms
@@ -75,5 +75,3 @@ dependencies = Dependency[
 ]
 
 build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies; julia_compat="1.6")
-
-# Build trigger: 2
